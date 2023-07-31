@@ -1,0 +1,51 @@
+import logging
+
+from java.awt import Window
+from java.awt.event import WindowEvent
+
+from pyjt.Errors import ElementNotFoundError
+from pyjt.ComponentFinder import ComponentFinder, Locator
+from pyjt.Fixture import Fixture
+from pyjt.Inspector import Inspector
+from pyjt import Proxy
+
+log = logging.getLogger(__name__)
+
+
+class FrameFinder:
+    @staticmethod
+    def find(locator=None, **kwargs):
+        locator = locator if locator else Locator(**kwargs)
+        wp = Proxy(Window)
+        window = ComponentFinder.findIn(func=wp.getWindows, locator=locator)
+        if not window:
+            raise ElementNotFoundError(f"Window {kwargs} not found!")
+        return Frame(window=window)
+
+    @staticmethod
+    def inspect():
+        wp = Proxy(Window)
+        result = []
+        for window in wp.getWindows():
+            result.append(Inspector.inspect(window))
+        return result
+
+
+class Frame:
+    def __init__(self, window=None):
+        self._window = window
+
+    def find(self, locator=None, **kwargs):
+        log.debug(f"frame.find({locator}, {kwargs})")
+        locator = locator if locator else Locator(**kwargs)
+        control = ComponentFinder.find(self._window, locator)
+        if not control:
+            raise ElementNotFoundError(f"Control({kwargs}) not found!")
+        return Fixture(control)
+
+    def locate(self, role, **kwargs):
+        kwargs['role'] = role
+        return self.find(**kwargs)
+
+    def close(self):
+        self._window.instance.dispatchEvent(WindowEvent(self._window.instance, WindowEvent.WINDOW_CLOSING))
