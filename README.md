@@ -14,18 +14,18 @@ control the application from a test automation perspective.
 
 ## Quickstart
 
-        import pyjt
-        
-        from javax.swing import JButton
+    import pyjt
+    
+    from javax.swing import JButton
 
-        # start your java application here, in this case, we start
-        # a hello world application located in HelloWorld.java
-        pyjt.run("HelloWorld")
+    # start your java application here, in this case, we start
+    # a hello world application located in HelloWorld.java
+    pyjt.run("HelloWorld")
 
-        # find the frame window titled "Hello World"
-        frame = pyjt.FrameFinder.find(title="Hello World")
+    # find the frame window titled "Hello World"
+    frame = pyjt.FrameFinder.find(title="Hello World")
 
-        # Locate and click a button on the frame
-        frame.locate(JButton, text="Ok")
+    # Locate and click a button on the frame
+    frame.locate(JButton, text="Ok")
 
 
