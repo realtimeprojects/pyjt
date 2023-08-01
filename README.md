@@ -26,6 +26,6 @@ control the application from a test automation perspective.
     frame = pyjt.FrameFinder.find(title="Hello World")
 
     # Locate and click a button on the frame
-    frame.locate(JButton, text="Ok")
+    frame.locate(JButton, text="Ok").click()
 
 
