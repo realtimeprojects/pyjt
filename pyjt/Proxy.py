@@ -48,7 +48,7 @@ class Proxy:
         return _savecall
 
     def __repr__(self):
-        return f"{type(self._instance)}: {self._instance.getName()}"
+        return f"{type(self._instance)}: {self.getName()}"
 
 
 def _proxitise(element):
