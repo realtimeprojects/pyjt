@@ -7,9 +7,9 @@ import jpype.imports
 jpype.startJVM(jpype.getDefaultJVMPath(), f"-Djava.class.path={os.environ.get('CLASSPATH', '')}")
 
 
-def run(app, *args, **kwargs):
+def run(app, args=[""]):
     module = importlib.import_module(app)
-    module.main(*args, **kwargs)
+    module.main(args)
 
 def shutdown():
     jpype.shutdownJVM()
