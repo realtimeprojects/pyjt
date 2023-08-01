@@ -8,3 +8,24 @@ Features:
 -   Advanced locators to find ui compoments within the component tree
 -   Simulate real user interactions by mouse and keyboard
 
+This library makes use of **jpype** as the interface to the java
+virtual machine. It basicaly consists of helper functions to
+control the application from a test automation perspective.
+
+## Quickstart
+
+        import pyjt
+        
+        from javax.swing import JButton
+
+        # start your java application here, in this case, we start
+        # a hello world application located in HelloWorld.java
+        pyjt.run("HelloWorld")
+
+        # find the frame window titled "Hello World"
+        frame = pyjt.FrameFinder.find(title="Hello World")
+
+        # Locate and click a button on the frame
+        frame.locate(JButton, text="Ok")
+
+
