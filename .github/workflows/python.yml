@@ -39,7 +39,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
     - name: run tox with xvfb
-      uses: tomasz-rekawek/setup-xvfb@1.0.2
+      uses: coactions/setup-xvfb@v1
       with:
-        run:  -w 10 -l tox
-        options: "-screen 0 640x480x8"
+        run: tox
+        # options: "-screen 0 640x480x8"
