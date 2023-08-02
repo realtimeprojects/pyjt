@@ -135,7 +135,7 @@ class Robot:
             :param control: The control to move the mouse pointer to.
         """
         position = control.getLocationOnScreen()
-        self._robot.mouseMove(position.x, position.y)
+        self._robot.mouseMove(position.x + 2, position.y + 2)
 
     def click(self):
         """ Execute a click of the left mouse. """
