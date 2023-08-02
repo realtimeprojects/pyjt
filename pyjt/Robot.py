@@ -138,7 +138,7 @@ class Robot:
     def click(self):
         """ Execute a click of the left mouse. """
         import java
-        log.debug("mousedown")
+        log.debug("xmousedown")
         self._robot.mousePress(java.awt.event.MouseEvent.BUTTON1_DOWN_MASK)
         log.debug(f"sleeping for {1 / self._typespeed}")
         time.sleep(1 / self._typespeed)
