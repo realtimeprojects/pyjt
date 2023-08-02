@@ -1,3 +1,8 @@
+# v0.2.1
+> 2023-08-02
+
+-   Robot.type(): Fix key events for some more special characters.
+
 # v0.2.0
 > 2023-08-02
 

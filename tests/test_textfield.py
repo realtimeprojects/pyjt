@@ -3,10 +3,11 @@ from pyjt import FillMode
 
 def test_type_textfield(helloworld, javax):
     tf1 = helloworld.locate(javax.swing.JTextField, name="tf1")
+    txt = "Hello@World!$~_-()%[]{}\"'?#&*"
     assert tf1 is not None
     assert tf1.getText() == "textfield1"
-    tf1.fill("Hello@World!$~_-()", mode=FillMode.TYPE)
-    assert tf1.getText() == "Hello@World!$~_-()"
+    tf1.fill(txt, mode=FillMode.TYPE)
+    assert tf1.getText() == txt
 
 
 def test_set_textfield(helloworld, javax):
