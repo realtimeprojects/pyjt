@@ -1,4 +1,7 @@
 import time
+import logging
+
+log = logging.getLogger(__name__)
 
 
 class Robot:
@@ -130,8 +133,10 @@ class Robot:
     def click(self):
         """ Execute a click of the left mouse. """
         import java
+        log.debug("mousedown")
         self._robot.mousePress(java.awt.event.MouseEvent.BUTTON1_DOWN_MASK)
         time.sleep(self._typespeed)
+        log.debug("mouseup")
         self._robot.mouseRelease(java.awt.event.MouseEvent.BUTTON1_DOWN_MASK)
 
     def type(self, text):
