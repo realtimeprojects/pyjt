@@ -38,18 +38,13 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
-    - run: |
+    - name: Setup xvfb
+      run: |
         sudo apt-get install xvfb
         export DISPLAY=':99.0'
         Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
         tox
 
-    - name: cleanup xvfb
+    - name: Run pytests using tox
       run: |
-        xvfb_pids=`ps aux | grep tmp/xvfb-run | grep -v grep | awk '{print $2}'`
-        if [ "$xvfb_pids" != "" ]; then
-          echo "Killing the following xvfb processes: $xvfb_pids"
-          sudo kill $xvfb_pids
-        else
-          echo "No xvfb processes to kill"
-        fi
+        tox
