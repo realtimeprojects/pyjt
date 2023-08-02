@@ -41,5 +41,5 @@ jobs:
     - name: run tox with xvfb
       uses: tomasz-rekawek/setup-xvfb@1.0.2
       with:
-        run:  tox
-        options: "-screen 0 1024x768x24"
+        run:  -w 10 -l tox
+        options: "-screen 0 640x480x8"
