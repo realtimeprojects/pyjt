@@ -43,7 +43,7 @@ class Fixture:
         if mode == FillMode.TYPE:
             self.click()
             if clear:
-                self._control.selectAll()
+                self.robot.selectAll()
             self.robot.type(text)
         if mode == FillMode.SET:
             self._control.setText(text)

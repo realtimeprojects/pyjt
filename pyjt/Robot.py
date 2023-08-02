@@ -145,6 +145,10 @@ class Robot:
         log.debug("mouseup")
         self._robot.mouseRelease(java.awt.event.MouseEvent.BUTTON1_DOWN_MASK)
 
+    def selectAll(self):
+        from java.awt.event import KeyEvent
+        self._typeVKs([KeyEvent.VK_CONTROL, KeyEvent.VK_A])
+
     def type(self, text):
         """ Emulate user typing the given text.
 
