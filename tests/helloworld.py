@@ -5,7 +5,7 @@ import jpype.imports
 import java     # noqa: E402
 import javax    # noqa: E402
 
-from javax.swing import JFrame, JLabel  # noqa: E402
+from javax.swing import JFrame, JLabel, JTextField  # noqa: E402
 
 
 def createAndShowGUI():
@@ -13,6 +13,9 @@ def createAndShowGUI():
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
     label = JLabel("Hello World")
     frame.getContentPane().add(label)
+    tf1 = JTextField("textfield1")
+    tf1.setName("tf1")
+    frame.getContentPane().add(tf1)
     frame.pack()
     frame.setVisible(True)
 

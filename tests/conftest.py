@@ -4,12 +4,13 @@ import pytest
 import pyjt
 
 
-@pytest.fixture
-def helloworld(scope='session'):
+@pytest.fixture(scope='session')
+def helloworld():
     pyjt.start()
     import helloworld
     helloworld.main()
     window = pyjt.FrameFinder.find(title="HelloWorldSwing")
     yield window
     if window:
-        window.close()
+        window.dispose()
+    pyjt.stop()

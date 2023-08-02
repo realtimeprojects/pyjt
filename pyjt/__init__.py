@@ -11,6 +11,10 @@ def start():
     """
     jpype.startJVM(jpype.getDefaultJVMPath(), f"-Djava.class.path={os.environ.get('CLASSPATH', '')}")
 
+def stop():
+    jpype.shutdownJVM()
+
+
 
 def run(app, args=[""]):
     module = importlib.import_module(app)
@@ -21,6 +25,6 @@ def shutdown():
 
 from .Proxy import Proxy
 from .Frame import Frame, FrameFinder
-from .Fixture import Fixture
+from .Fixture import Fixture, FillMode
 from .ComponentFinder import Locator
 from .Inspector import Inspector
