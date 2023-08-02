@@ -12,7 +12,8 @@ def start(classpath=None):
         :param classpath:   If set, use this classpath for the JVM, otherwise
                             use CLASSPATH environment variable.
     """
-    jpype.startJVM(jpype.getDefaultJVMPath(), f"-Djava.class.path={os.environ.get('CLASSPATH', '')}")
+    cp = os.environ.get('CLASSPATH', '') if classpath is None else classpath
+    jpype.startJVM(jpype.getDefaultJVMPath(), f"-Djava.class.path={cp}")
 
 def stop():
     jpype.shutdownJVM()
