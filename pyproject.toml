@@ -1,6 +1,6 @@
 [project]
 name = "pyjt"
-version = "0.1.0a6"
+version = "0.1.0a7"
 description="test automation for java UI applications from python"
 authors = [
     { name="Claudio Klingler", email="ck@realtime-projects.com"}
