@@ -1,8 +1,5 @@
 import logging
 
-from java.awt import Window
-from java.awt.event import WindowEvent
-
 from pyjt.Errors import ElementNotFoundError
 from pyjt.ComponentFinder import ComponentFinder, Locator
 from pyjt.Fixture import Fixture
@@ -15,6 +12,7 @@ log = logging.getLogger(__name__)
 class FrameFinder:
     @staticmethod
     def find(locator=None, **kwargs):
+        from java.awt import Window
         locator = locator if locator else Locator(**kwargs)
         wp = Proxy(Window)
         window = ComponentFinder.findIn(func=wp.getWindows, locator=locator)
@@ -24,6 +22,7 @@ class FrameFinder:
 
     @staticmethod
     def inspect():
+        from java.awt import Window
         wp = Proxy(Window)
         result = []
         for window in wp.getWindows():
@@ -48,4 +47,5 @@ class Frame:
         return self.find(**kwargs)
 
     def close(self):
+        from java.awt.event import WindowEvent
         self._window.instance.dispatchEvent(WindowEvent(self._window.instance, WindowEvent.WINDOW_CLOSING))
