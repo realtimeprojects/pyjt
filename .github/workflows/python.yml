@@ -40,4 +40,5 @@ jobs:
 
     - name: run tox with xvfb
       uses: tomasz-rekawek/setup-xvfb@1.0.2
-      run:  tox
+      with:
+        run:  tox
