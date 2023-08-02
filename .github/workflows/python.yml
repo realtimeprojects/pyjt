@@ -38,12 +38,9 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
-    - name: setup xvfb
-      run: |
-        apt-get install xvfb &
-        Xvfb :99.0 -screen 0 1280x1024x24
+    - name: run-with-xvfb
+      uses: tomasz-rekawek/setup-xvfb@1.0.2
 
     - name: Test with tox
       run: |
-        export DISPLAY=:99.0
         tox
