@@ -140,7 +140,7 @@ class Robot:
         import java
         log.debug("mousedown")
         self._robot.mousePress(java.awt.event.MouseEvent.BUTTON1_DOWN_MASK)
-        log.debug("sleeping")
+        log.debug("sleeping for {1 / self._typespeed}")
         time.sleep(1 / self._typespeed)
         log.debug("mouseup")
         self._robot.mouseRelease(java.awt.event.MouseEvent.BUTTON1_DOWN_MASK)
