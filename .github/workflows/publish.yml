@@ -1,3 +1,5 @@
+name: publish release to pypi.org
+
 on:
   push:
     tags:
@@ -30,7 +32,7 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
-    - name: Setup xvfb
+    - name: run pytests
       run: |
         sudo apt-get install xvfb
         export DISPLAY=':99.0'
