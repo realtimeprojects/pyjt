@@ -46,6 +46,9 @@ class Frame:
         kwargs['role'] = role
         return self.find(**kwargs)
 
+    def dispose(self):
+        self._window.dispose()
+
     def close(self):
         from java.awt.event import WindowEvent
         self._window.instance.dispatchEvent(WindowEvent(self._window.instance, WindowEvent.WINDOW_CLOSING))
