@@ -42,4 +42,4 @@ jobs:
       uses: tomasz-rekawek/setup-xvfb@1.0.2
       with:
         run:  tox
-        options: -screen 0 1024x768x24
+        options: "-screen 0 1024x768x24"
