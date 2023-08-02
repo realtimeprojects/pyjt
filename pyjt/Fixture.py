@@ -16,6 +16,7 @@ class Fixture:
     def click(self):
         log.debug(f"click({self._control})")
         self.robot.move(self._control)
+        log.debug(f"executing click({self._control})")
         self.robot.click()
 
     def fill(self, text, mode=FillMode.TYPE, clear=True):
@@ -42,7 +43,7 @@ class Fixture:
         if mode == FillMode.TYPE:
             self.click()
             if clear:
-                self._control.selectAll()
+                self.robot.selectAll()
             self.robot.type(text)
         if mode == FillMode.SET:
             self._control.setText(text)

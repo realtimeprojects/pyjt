@@ -1,8 +1,14 @@
 import time
+import logging
+
+from pyjt import Proxy
+
+log = logging.getLogger(__name__)
 
 
 class Robot:
     """ Smart robot features for controlling the application. """
+    _robot = None
 
     def __init__(self, robot=None, typespeed=20):
         """ Create a new robot class.
@@ -16,7 +22,11 @@ class Robot:
         import java
         from java.awt.event import KeyEvent
 
-        self._robot = robot if robot else java.awt.Robot()
+        self._robot = Proxy(robot) if robot else Robot._robot
+        if not self._robot:
+            Robot._robot = Proxy(java.awt.Robot())
+            self._robot = Robot._robot
+
         self._typespeed = typespeed
 
         self._KeyCodes = {
@@ -125,14 +135,21 @@ class Robot:
             :param control: The control to move the mouse pointer to.
         """
         position = control.getLocationOnScreen()
-        self._robot.mouseMove(position.x, position.y)
+        self._robot.mouseMove(position.x + 2, position.y + 2)
 
     def click(self):
         """ Execute a click of the left mouse. """
         import java
+        log.debug("ymousedown")
         self._robot.mousePress(java.awt.event.MouseEvent.BUTTON1_DOWN_MASK)
-        time.sleep(self._typespeed)
+        log.debug(f"sleeping for {1 / self._typespeed}")
+        time.sleep(1 / self._typespeed)
+        log.debug("mouseup")
         self._robot.mouseRelease(java.awt.event.MouseEvent.BUTTON1_DOWN_MASK)
+
+    def selectAll(self):
+        from java.awt.event import KeyEvent
+        self._typeVKs([KeyEvent.VK_CONTROL, KeyEvent.VK_A])
 
     def type(self, text):
         """ Emulate user typing the given text.
