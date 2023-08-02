@@ -1,6 +1,8 @@
 import time
 import logging
 
+from pyjt import Proxy
+
 log = logging.getLogger(__name__)
 
 
@@ -20,9 +22,9 @@ class Robot:
         import java
         from java.awt.event import KeyEvent
 
-        self._robot = robot if robot else Robot._robot
+        self._robot = Proxy(robot) if robot else Robot._robot
         if not self._robot:
-            Robot._robot = java.awt.Robot()
+            Robot._robot = Proxy(java.awt.Robot())
             self._robot = Robot._robot
 
         self._typespeed = typespeed
