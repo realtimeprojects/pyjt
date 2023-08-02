@@ -141,7 +141,7 @@ class Robot:
         """ Execute a click of the left mouse. """
         import java
         log.debug("zmousedown")
-        btn = java.awt.InputEvent.getMaskForButton(1)
+        btn = java.awt.event.InputEvent.getMaskForButton(1)
         self._robot.mousePress(btn)
         log.debug(f"sleeping for {1 / self._typespeed}")
         time.sleep(1 / self._typespeed)
