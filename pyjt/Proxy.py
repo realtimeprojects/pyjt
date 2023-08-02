@@ -8,7 +8,7 @@ log = logging.getLogger(__name__)
 
 
 @jpype.JImplements(java.lang.Runnable)
-class Launch:
+class _Launch:
     def __init__(self, func, *args, **kwargs):
         self._func = func
         self._args = args
@@ -25,7 +25,27 @@ class Launch:
 
 
 class Proxy:
+    """ Proxy calls to the java.awt and javax.swing libraries using
+        the event thread to ensure thread-safety.
+
+        This class is usually automatically instanciated and returned
+        by the locate() and find() functions of pyjt.
+
+        If the proxy detects that the return value of the call
+        is a instance of java.awt.Component, a new proxy instance
+        for this object is created and returned.
+
+        Example:
+
+            proxy = Proxy(java.swing.JLabel())
+            text = proxy.getText()
+    """
     def __init__(self, instance):
+        """ Create a new proxy.
+
+            :param instance: The instance of a java.awt.* or java.swing.* class
+                             to proxy call to.
+         """
         self._instance = instance
 
     @property
@@ -37,7 +57,7 @@ class Proxy:
 
         def _savecall(*args, **kwargs):
             # log.debug(f"proxying call: {name}({args}, {kwargs})")
-            launcher = Launch(fnc, *args, **kwargs)
+            launcher = _Launch(fnc, *args, **kwargs)
             javax.swing.SwingUtilities.invokeAndWait(launcher)
             ret = launcher._ret
             # log.debug(f"\tret is {ret} {type(ret)}")
