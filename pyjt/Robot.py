@@ -6,6 +6,7 @@ log = logging.getLogger(__name__)
 
 class Robot:
     """ Smart robot features for controlling the application. """
+    _robot = None
 
     def __init__(self, robot=None, typespeed=20):
         """ Create a new robot class.
@@ -19,7 +20,11 @@ class Robot:
         import java
         from java.awt.event import KeyEvent
 
-        self._robot = robot if robot else java.awt.Robot()
+        self._robot = robot if robot else Robot._robot
+        if not self._robot:
+            Robot._robot = java.awt.Robot()
+            self._robot = Robot._robot
+
         self._typespeed = typespeed
 
         self._KeyCodes = {
