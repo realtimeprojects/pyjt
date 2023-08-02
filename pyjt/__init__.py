@@ -4,7 +4,12 @@ import importlib
 import jpype
 import jpype.imports
 
-jpype.startJVM(jpype.getDefaultJVMPath(), f"-Djava.class.path={os.environ.get('CLASSPATH', '')}")
+def start():
+    """ Start the pyjt JVM.
+
+        Needs to be called before using pyjt.
+    """
+    jpype.startJVM(jpype.getDefaultJVMPath(), f"-Djava.class.path={os.environ.get('CLASSPATH', '')}")
 
 
 def run(app, args=[""]):

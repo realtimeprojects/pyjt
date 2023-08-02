@@ -20,6 +20,7 @@ control the application from a test automation perspective.
 
     # start your java application here, in this case, we start
     # a hello world application located in HelloWorld.java
+    pyjt.start()
     pyjt.run("HelloWorld")
 
     # find the frame window titled "Hello World"
