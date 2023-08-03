@@ -1,9 +1,12 @@
+""" Inspect UI components """
 import logging
 
 log = logging.getLogger(__name__)
 
 
 class Inspector:
+    """ Helper class for inspecting the component tree of a specific component.
+    """
     @staticmethod
     def inspect(component):
         """ Inspects the component tree of a component and returns a dictionary
