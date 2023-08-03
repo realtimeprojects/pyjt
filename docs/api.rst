@@ -5,5 +5,9 @@ API
    :toctree: generated
 
     pyjt
-    pyjt.Frame
-    pyjt.Inspector
+
+.. automodule:: pyjt
+
+.. automodule:: pyjt.Frame
+
+.. automodule:: pyjt.Inspector
