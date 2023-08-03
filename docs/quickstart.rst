@@ -13,10 +13,10 @@ Install pyjt using pip3:
 Starting your app and identifying a frame
 -----------------------------------------
 
-pyjt uses `jpype` to start a JVM inside your python
+pyjt uses `jpype <https://github.com/jpype-project/jpype>`_ to start a JVM inside your python
 thread and starts your application inside this JVM.
 
-Create a python script named `sample.py` and add the following code:
+Create a python script named ``sample.py`` and add the following code:
 
 .. code:: python
 
@@ -25,9 +25,9 @@ Create a python script named `sample.py` and add the following code:
     # start the JVM
     pyjt.start()
 
-Now you can run your application using `pyjt.run()`. pyjt
+Now you can run your application using ``pyjt.run()``. pyjt
 expects the name of the class of your application containing
-a `main()` function and it will run the main function:
+a ``main()`` function and it will run the main function:
 
 .. code:: python
 

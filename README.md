@@ -37,3 +37,6 @@ control the application from a test automation perspective.
     # Close the frame (application)
     frame.close()
 
+## Further documentation
+
+Check the [documentation on rtfd.io](https://pyjt.readthedocs.io/en/latest/)
