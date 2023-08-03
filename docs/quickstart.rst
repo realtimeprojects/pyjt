@@ -25,6 +25,14 @@ Create a python script named ``sample.py`` and add the following code:
     # start the JVM
     pyjt.start()
 
+After the JVM is started, you can import java classes and libraries
+with the import statement:
+
+.. code:: python
+
+   import java
+   import javax
+
 Now you can run your application using ``pyjt.run()``. pyjt
 expects the name of the class of your application containing
 a ``main()`` function and it will run the main function:
@@ -58,7 +66,7 @@ thread safety:
 
 .. code:: python
 
-   firstname = frame.find(JTextField, name='first name')
+   firstname = frame.find(javax.swing.JTextField, name='first name')
    assert firstname.getText() == 'John'
 
 Control UI elements
