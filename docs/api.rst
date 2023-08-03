@@ -9,3 +9,6 @@ API
     FrameFinder
     Locator
     Fixture
+    Proxy
+    Robot
+
