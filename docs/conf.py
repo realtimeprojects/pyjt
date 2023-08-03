@@ -2,7 +2,7 @@ import sys
 import os
 import shlex
 
-source_suffix = '.md'
+source_suffix = '.rst'
 
 master_doc = 'index'
 
