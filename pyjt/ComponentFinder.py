@@ -7,17 +7,49 @@ log = logging.getLogger(__name__)
 
 
 class Locator:
+    """ The Locator determines if a component matches specific search
+        criteria.
+
+        Args:
+            **kwargs:   Search parameters as keyword arguments.
+
+        Search criteria:
+            The locator constructor receives a list of <name>:<value>
+            keyword arguments and stores them.
+
+            For each argument, the locator will call the component's
+            get<Name>() function and compares it's return value to <value>.
+            Only if the values are equal, the component matches this
+            search criteria.
+    """
     def __init__(self, **kwargs):
         self._filters = kwargs
         self._contains = []
         self._has = []
 
     def update(self, **kwargs):
+        """ Add more search criteria's to this locator.
+
+            Args:
+                **kwargs:   The search criteria's to add.
+                            Any existing search criteria will be overwritten.
+
+            Returns:
+                A reference to this locator object (self)
+        """
         self._filters.update(**kwargs)
+        return self
 
     def contains(self, **kwargs):
         """ Ensure the control has a sub-component with the given attributes
             somewhere in the tree.
+
+            Args:
+                **kwargs:   The search criteria for the sub-component
+                            that has to be a part of the component candiate.
+
+            Returns:
+                A reference to this locator object (self)
         """
         self._contains.append(Locator(**kwargs))
         return self
@@ -30,6 +62,19 @@ class Locator:
         return self
 
     def matches(self, component):
+        """ The matches function determines wether the given component matches
+            matches the search criteria.
+
+            You can implement your own matcher by deriving a class from this
+            Locator and implement this function.
+
+            Args:
+                component:  The component that should match this search
+                            criteria.
+            Returns:
+                True, if the component matches this search criteria, otherwise False.
+        """
+
         if not _matches(component, **self._filters):
             return False
 
