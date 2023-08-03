@@ -15,6 +15,8 @@ control the application from a test automation perspective.
 ## Quickstart
 
     import pyjt
+
+    pyjt.start()
     
     from javax.swing import JButton
 
