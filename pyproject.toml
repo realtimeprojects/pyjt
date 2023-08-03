@@ -1,6 +1,6 @@
 [project]
 name = "pyjt"
-version = "0.3.0"
+version = "0.3.1"
 description="test automation for java UI applications from python"
 authors = [
     { name="Claudio Klingler", email="ck@realtime-projects.com"}
@@ -28,3 +28,5 @@ build-backend = "setuptools.build_meta"
 [project.urls]
 "Homepage" = "https://github.com/realtimeprojects/pyjt"
 "Bug Tracker" = "https://github.com/realtimeprojects/pyjt/issues"
+"Documentation" = "https://pyjt.readthedocs.io/en/latest/"
+"Releases" = "https://github.com/realtimeprojects/pyjt/blob/master/RELEASES.md"
