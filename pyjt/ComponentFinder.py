@@ -55,7 +55,7 @@ class Locator:
         return self
 
     def has(self, **kwargs):
-        """ Ensure the control has a directo sub-component with the given
+        """ Ensure the control has a direct sub-component with the given
             attributes.
         """
         self._has.append(Locator(**kwargs))
