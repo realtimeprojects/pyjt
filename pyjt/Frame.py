@@ -16,10 +16,14 @@ class FrameFinder:
     """
     @staticmethod
     def find(locator=None, **kwargs):
-        """ Find a frame by a **locator or frame attributes.
+        """ Find a frame by a **locator** or frame attributes.
 
-            :param locator: Locator to find a frame
-            :param kwargs:  Frame attributes.
+            Parameters
+            ----------
+            locator : Locator
+                Locator to find a frame.
+            **kwargs:
+                Search filters by keyword arguments.
         """
         from java.awt import Window
         locator = locator if locator else Locator(**kwargs)
@@ -31,8 +35,13 @@ class FrameFinder:
 
     @staticmethod
     def inspect():
-        """ :return: A dicitionary tree of all ui components of all available
-            frames.
+        """ Inspect a component
+
+            Returns
+            -------
+
+            dict    A dicitionary tree of all ui components of all available
+                    frames.
         """
         from java.awt import Window
         wp = Proxy(Window)
