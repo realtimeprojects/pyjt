@@ -1,4 +1,4 @@
-Proxy
+Robot
 -----
 
 .. currentmodule:: pyjt
