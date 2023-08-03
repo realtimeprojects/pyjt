@@ -10,3 +10,5 @@ project = u'pyjt'
 copyright = u'2023, Claudio Klingler'
 author = u'Claudio Klingler'
 
+extensions = [ 'sphinx.ext.autodoc', 'sphinx.ext.autosummary' ]
+
