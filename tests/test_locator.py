@@ -27,3 +27,7 @@ def test_locator_has(helloworld, java, javax):
     assert tf.getText() == "textfield4"
     tf.fill("john@smith.com")
     assert tf.getText() == "john@smith.com"
+
+    loc = Locator(role=java.awt.Container).has(role=javax.swing.JLabel, text="Email:").has(text="john@smith.com")
+    match = helloworld.locate(loc)
+    assert match is not None
