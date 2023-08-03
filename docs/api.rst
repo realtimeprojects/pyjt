@@ -9,8 +9,6 @@ API
 Modules
 -------
 
-.. automodule:: pyjt
-
 .. automodule:: pyjt.Frame
    :members:
 
