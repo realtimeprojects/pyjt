@@ -1,11 +1,11 @@
 API
 ===
 
-.. autosummary::
-   :toctree: modules
+.. toctree::
+    :maxdepth: 1
 
-    pyjt.Frame
-    pyjt.FrameFinder
-    pyjt.Inspector
-    pyjt.Robot
-
+    pyjt
+    Frame
+    FrameFinder
+    Locator
+    Fixture

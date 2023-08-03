@@ -16,20 +16,26 @@ class FrameFinder:
     """
     @staticmethod
     def find(locator=None, **kwargs):
-        """ Find a frame by a locator or frame attributes.
+        """Find a frame by a locator or frame attributes.
 
-            Parameters
-            ----------
-            locator : Locator
-                Locator to find a frame.
-            **kwargs :
-                Search filters by keyword arguments.
+        Parameters
+        ----------
+        locator : Locator
+            Locator to find a frame.
+        **kwargs :
+            Search filters by keyword arguments.
 
-            Raises
-            ------
+        Raises
+        ------
 
-            ElementNotFoundError
-                If the no frame was found matching the given search criteria.
+        ElementNotFoundError
+            If the no frame was found matching the given search criteria.
+
+        Returns
+        -------
+        Frame
+            A Frame instance reflecting the frame window found by the find
+            operation.
         """
         from java.awt import Window
         locator = locator if locator else Locator(**kwargs)
@@ -58,9 +64,12 @@ class FrameFinder:
 
 
 class Frame(Fixture):
+    """ Wrapper for controlling a frame. """
     def dispose(self):
+        """ Dispose this frame. """
         self._control.dispose()
 
     def close(self):
+        """ Close this frame by sending a close message. """
         from java.awt.event import WindowEvent
         self._control.instance.dispatchEvent(WindowEvent(self._component.instance, WindowEvent.WINDOW_CLOSING))
