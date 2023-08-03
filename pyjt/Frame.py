@@ -16,14 +16,20 @@ class FrameFinder:
     """
     @staticmethod
     def find(locator=None, **kwargs):
-        """ Find a frame by a **locator** or frame attributes.
+        """ Find a frame by a locator or frame attributes.
 
             Parameters
             ----------
             locator : Locator
                 Locator to find a frame.
-            **kwargs:
+            **kwargs :
                 Search filters by keyword arguments.
+
+            Raises
+            ------
+
+            ElementNotFoundError
+                If the no frame was found matching the given search criteria.
         """
         from java.awt import Window
         locator = locator if locator else Locator(**kwargs)
@@ -31,7 +37,7 @@ class FrameFinder:
         for window in wp.getWindows():
             if locator.matches(window):
                 return Frame(window)
-        raise ElementNotFoundError(f"Window {kwargs} not found!")
+        raise ElementNotFoundError(f"Window {locator} not found!")
 
     @staticmethod
     def inspect():
