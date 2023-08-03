@@ -10,8 +10,8 @@ Install pyjt using pip3:
 
     pip3 install pyjt
 
-Starting your app and identifying a frame
------------------------------------------
+Starting your app
+-----------------
 
 pyjt uses `jpype <https://github.com/jpype-project/jpype>`_ to start a JVM inside your python
 thread and starts your application inside this JVM.
