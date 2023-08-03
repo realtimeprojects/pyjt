@@ -2,9 +2,11 @@ API
 ===
 
 .. autosummary::
-   :toctree: generated
+   :toctree: modules
 
-    pyjt
+    pyjt.Frame
+    pyjt.Inspector
+    pyjt.Robot
 
 Modules
 -------
