@@ -45,5 +45,6 @@ def shutdown():
 from .Proxy import Proxy
 from .Frame import Frame, FrameFinder
 from .Fixture import Fixture, FillMode
+from .Errors import ElementNotFoundError
 from .ComponentFinder import Locator
 from .Inspector import Inspector

@@ -1,7 +1,8 @@
 import logging
 from enum import Enum
 from pyjt.Robot import Robot
-
+from pyjt.ComponentFinder import ComponentFinder, Locator
+from pyjt.Errors import ElementNotFoundError
 
 log = logging.getLogger(__name__)
 
@@ -12,6 +13,18 @@ class Fixture:
     def __init__(self, control):
         self._control = control
         self.robot = Robot()
+
+    def locate(self, locator=None, **kwargs):
+        log.debug(f"frame.find({locator}, {kwargs})")
+        locator = locator if locator else Locator(**kwargs)
+        control = ComponentFinder.findIn(self._control.getComponents, locator)
+        if not control:
+            raise ElementNotFoundError(f"Control({kwargs}) not found!")
+        return Fixture(control)
+
+    def find(self, role, **kwargs):
+        kwargs['role'] = role
+        return self.locate(**kwargs)
 
     def click(self):
         log.debug(f"click({self._control})")
@@ -50,3 +63,6 @@ class Fixture:
 
     def __getattr__(self, name):
         return getattr(self._control, name)
+
+    def __repr__(self):
+        return str(self._control)

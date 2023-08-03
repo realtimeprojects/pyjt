@@ -10,29 +10,53 @@ class Locator:
     def __init__(self, **kwargs):
         self._filters = kwargs
         self._contains = []
+        self._has = []
 
     def update(self, **kwargs):
         self._filters.update(**kwargs)
 
     def contains(self, **kwargs):
+        """ Ensure the control has a sub-component with the given attributes
+            somewhere in the tree.
+        """
         self._contains.append(Locator(**kwargs))
         return self
 
+    def has(self, **kwargs):
+        """ Ensure the control has a directo sub-component with the given
+            attributes.
+        """
+        self._has.append(Locator(**kwargs))
+        return self
+
     def matches(self, component):
-        if not self._has(component):
+        if not _matches(component, **self._filters):
             return False
 
+        log.debug(f"found {component}, checking childs...")
         for locator in self._contains:
             log.debug(f"contains {locator}")
             if ComponentFinder._locate(window=component, locator=locator) is None:
                 return False
-        return True
 
-    def _has(self, component):
-        return _matches(component, **self._filters)
+        for locator in self._has:
+            log.debug(f"has {locator}")
+            if not _child_matches(component, locator):
+                return False
+        return True
 
     def __repr__(self):
         return f"Locator({self._filters})"
+
+
+def _child_matches(component, locator):
+    log.debug(f"_child_matches({component}, {locator}")
+    for subcontrol in component.getComponents():
+        if locator.matches(subcontrol):
+            log.debug(f"_child_matches({component}, {locator}: found {subcontrol}")
+            return True
+    log.debug(f"_child_matches({component}, {locator}: FAILED")
+    return False
 
 
 class Timer:
@@ -55,7 +79,7 @@ class Timer:
 
 
 class ComponentFinder:
-    DEFAULT_TIMEOUT = 5
+    DEFAULT_TIMEOUT = 1
     DEFAULT_DELAY = 1
 
     @staticmethod
@@ -88,7 +112,6 @@ class ComponentFinder:
     @staticmethod
     def _locate(window, locator):
         log.debug(f"locate({locator})")
-        log.debug(f"locate({locator})")
         if locator.matches(window):
             return window
         components = window.getComponents()
@@ -109,7 +132,9 @@ def _matches(cmpt, **kwargs):
             log.debug(f"\tcheck01 {name} {type(cc)}={value}")
             check = isinstance(cc, value)
             log.debug(f"\t\tcheck01: {check}")
-            return check
+            if not check:
+                return False
+            continue
         fname = f"get{name[0].capitalize()}{name[1:]}"
         log.debug(f"check({name}, {value}) -> {fname}: {cmpt}")
         if not hasattr(cmpt, fname):

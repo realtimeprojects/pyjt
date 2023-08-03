@@ -1,3 +1,11 @@
+# v0.3.0
+> 2023-08-03
+
+-   Optimized find logic
+-   Moved find method to Fixture
+-   Fix locator bugs
+-   Add `Locator.has()` to search for direct childs
+
 # v0.2.1
 > 2023-08-02
 
