@@ -11,4 +11,6 @@ API
     Fixture
     Proxy
     Robot
+    Inspector
+    Errors
 

@@ -12,30 +12,31 @@ log = logging.getLogger(__name__)
 
 
 class FrameFinder:
-    """ Helper class to find a frame in the list of application frames.
+    """ Find a frame in the list of application frames.
+
+        Example:
+
+        .. code:: python
+
+            frame = FrameFinder(title="Hello World")
+            frame.find(JTextField, name="first name")
     """
     @staticmethod
     def find(locator=None, **kwargs):
         """Find a frame by a locator or frame attributes.
 
-        Parameters
-        ----------
-        locator : Locator
-            Locator to find a frame.
-        **kwargs :
-            Search filters by keyword arguments.
+            Args:
+                locator (Locator):  Locator to find a frame.
+                **kwargs:           Search filters by keyword arguments.
 
-        Raises
-        ------
+            Raises:
+                ElementNotFoundError:
+                         No frame was found matching the given search criteria.
 
-        ElementNotFoundError
-            If the no frame was found matching the given search criteria.
-
-        Returns
-        -------
-        Frame
-            A Frame instance reflecting the frame window found by the find
-            operation.
+            Returns:
+                Frame:
+                    The first frame in the list of frames matching
+                    the search criteria.
         """
         from java.awt import Window
         locator = locator if locator else Locator(**kwargs)
@@ -47,12 +48,11 @@ class FrameFinder:
 
     @staticmethod
     def inspect():
-        """ Inspect a component
+        """ Inspect a component.
 
-            Returns
-            -------
-
-            dict    A dicitionary tree of all ui components of all available
+            Returns:
+                dict:
+                    A dicitionary tree of all ui components of all available
                     frames.
         """
         from java.awt import Window
@@ -72,4 +72,4 @@ class Frame(Fixture):
     def close(self):
         """ Close this frame by sending a close message. """
         from java.awt.event import WindowEvent
-        self._control.instance.dispatchEvent(WindowEvent(self._component.instance, WindowEvent.WINDOW_CLOSING))
+        self._control.object.dispatchEvent(WindowEvent(self._component.instance, WindowEvent.WINDOW_CLOSING))

@@ -173,7 +173,7 @@ def _matches(cmpt, **kwargs):
     # log.debug(f"_matches({cmpt}, name={name}, text={text})")
     for name, value in kwargs.items():
         if name == 'role':
-            cc = cmpt.instance if isinstance(cmpt, Proxy) else cmpt
+            cc = cmpt.object if isinstance(cmpt, Proxy) else cmpt
             log.debug(f"\tcheck01 {name} {type(cc)}={value}")
             check = isinstance(cc, value)
             log.debug(f"\t\tcheck01: {check}")

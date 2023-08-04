@@ -43,8 +43,10 @@ def shutdown():
     jpype.shutdownJVM()
 
 from .Proxy import Proxy
+from .Robot import Robot
 from .Frame import Frame, FrameFinder
 from .Fixture import Fixture, FillMode
 from .Errors import ElementNotFoundError
 from .ComponentFinder import Locator
 from .Inspector import Inspector
+from .Errors import ElementNotFoundError

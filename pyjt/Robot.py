@@ -7,18 +7,18 @@ log = logging.getLogger(__name__)
 
 
 class Robot:
-    """ Smart robot features for controlling the application. """
+    """ Smart robot features for controlling the application.
+
+        Args:
+            robot (java.awt.Robot):
+                Use the given java.awt.Robot() object
+                If **robot** is None, create a own instance of the robot class.
+            typespeed (int):
+                The speed to type text in number of keystrokes per second.
+    """
     _robot = None
 
     def __init__(self, robot=None, typespeed=20):
-        """ Create a new robot class.
-
-        :param robot:       Use the given java.awt.Robot() instance for
-                            this instance. If **robot** is None,
-                            create a own instance of the robot class.
-
-        :param typespeed:   The speed to type text in number of keystrokes per second.
-        """
         import java
         from java.awt.event import KeyEvent
 
@@ -149,21 +149,22 @@ class Robot:
         self._robot.mouseRelease(btn)
 
     def selectAll(self):
+        """ Emulate selecting all text in the current context by pressing CTRL-A. """
         from java.awt.event import KeyEvent
         self._typeVKs([KeyEvent.VK_CONTROL, KeyEvent.VK_A])
 
     def type(self, text):
         """ Emulate user typing the given text.
 
-            :param text:    Text to type.
-
             Typing is emulated by generating VK_* events. The type speed
             (delay between each keystroke) is configured in the
             Robot's constructor's `typespeed` argument.
 
-            Limitations:
+            Args:
+                text (string):    Text to type.
 
-            -   Currently, this function assumes that a english keyboard layout
+            Note:
+                Currently, this function assumes that a english keyboard layout
                 is used.
         """
         for char in text:

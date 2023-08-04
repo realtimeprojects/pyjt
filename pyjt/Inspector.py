@@ -9,8 +9,16 @@ class Inspector:
     """
     @staticmethod
     def inspect(component):
-        """ Inspects the component tree of a component and returns a dictionary
-            with test-relevant data.
+        """ Inspects the component tree of a component.
+
+            Args:
+                component (Fixture):
+                    The component to inspect.
+
+            Returns:
+                dict:
+                    A dictionary with information of all sub-components
+                    for this component.
         """
         result = {}
         result['name'] = str(component.getName())

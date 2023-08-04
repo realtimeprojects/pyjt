@@ -15,22 +15,39 @@ class Proxy:
         is a instance of java.awt.Component, a new proxy instance
         for this object is created and returned.
 
+        Args:
+            obj (java.awt.Component):
+                The component to control with this Proxy.
+
         Example:
+
+        .. code:: python
 
             proxy = Proxy(java.swing.JLabel())
             text = proxy.getText()
     """
-    def __init__(self, instance):
-        """ Create a new proxy.
-
-            :param instance: The instance of a java.awt.* or java.swing.* class
-                             to proxy call to.
-         """
-        self._instance = instance
+    def __init__(self, obj):
+        self._object = obj
 
     @property
-    def instance(self):
-        return self._instance
+    def object(self):
+        """ Returns:
+                java.awt.Component: The control object managed by this proxy.
+        """
+        return self._object
+
+    def isinstance(self, classtype):
+        """ Check if the object managed by this class is an instance of **classtype**.
+
+            Args:
+                classtype (Class): The class type.
+
+            Returns:
+                boolean:
+                    True, if the object managed by this proxy
+                    is a instance of class **classtype**
+        """
+        return isinstance(self._object, classtype)
 
     def __getattr__(self, name):
         import javax
@@ -52,7 +69,7 @@ class Proxy:
                     log.error(str(ee))
                     raise ee
 
-        fnc = getattr(self._instance, name)
+        fnc = getattr(self._object, name)
 
         def _savecall(*args, **kwargs):
             # log.debug(f"proxying call: {name}({args}, {kwargs})")
@@ -67,7 +84,7 @@ class Proxy:
         return _savecall
 
     def __repr__(self):
-        return f"{type(self._instance)}: {self.getName()}"
+        return f"{type(self._object)}: {self.getName()}"
 
 
 def _proxitise(element):

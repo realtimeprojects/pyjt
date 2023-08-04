@@ -15,7 +15,7 @@ author = u'Claudio Klingler'
 
 extensions = [ 'sphinx.ext.autodoc', 'sphinx.ext.autosummary', 'sphinx.ext.napoleon' ]
 
-napoleon_google_docstrings = False
-napoleon_use_param = False
+napoleon_google_docstrings = True
+napoleon_use_param = True
 napoleon_use_ivar = True
 

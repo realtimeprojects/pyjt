@@ -1,12 +1,9 @@
-﻿Frame
------
+Errors
+------
 
 .. currentmodule:: pyjt
 
-.. autoclass:: FillMode
-
-.. autoclass:: Frame
+.. automodule:: pyjt.Errors
        :members:
-       :inherited-members:
        :undoc-members:
        :show-inheritance:
