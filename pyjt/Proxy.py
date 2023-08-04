@@ -64,7 +64,10 @@ class Proxy:
             @jpype.JOverride
             def run(self):
                 try:
-                    self._ret = self._func(*self._args, **self._kwargs)
+                    if callable(self._func):
+                        self._ret = self._func(*self._args, **self._kwargs)
+                    else:
+                        self._ret = self._func
                 except Exception as ee:
                     log.error(str(ee))
                     raise ee
@@ -81,6 +84,8 @@ class Proxy:
                 # log.info("\tlist detected!")
                 return [_proxitise(element) for element in ret]
             return _proxitise(ret)
+        if not callable(fnc):
+            return _savecall()
         return _savecall
 
     def __repr__(self):

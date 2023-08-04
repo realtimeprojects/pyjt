@@ -2,6 +2,7 @@
 > 2023-08-04
 
 -   Fix `Frame.close()` not working
+-   Proxy: Fix handling of properties
 
 # v0.4.0
 > 2023-08-04
