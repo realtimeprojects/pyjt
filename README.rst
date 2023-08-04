@@ -1,4 +1,5 @@
-# pyjt - test java UI applications from python
+pyjt - test java UI applications from python
+============================================
 
 pyjt supports you testing java UI applications from python.
 
@@ -12,13 +13,18 @@ This library makes use of **jpype** as the interface to the java
 virtual machine. It basicaly consists of helper functions to
 control the application from a test automation perspective.
 
-## Quickstart
+Quickstart
+----------
 
 -   Install pyjt
+
+.. code:: bash
 
         pip3 install pyjt
 
 -   Start testing your app
+
+.. code:: python
 
         import pyjt
 
@@ -43,6 +49,7 @@ control the application from a test automation perspective.
         # Close the frame (application)
         frame.close()
 
-## Further documentation
+Further documentation
+---------------------
 
 Check the [documentation on rtfd.io](https://pyjt.readthedocs.io/en/latest/)
