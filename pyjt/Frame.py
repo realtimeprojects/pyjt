@@ -72,4 +72,4 @@ class Frame(Fixture):
     def close(self):
         """ Close this frame by sending a close message. """
         from java.awt.event import WindowEvent
-        self._control.object.dispatchEvent(WindowEvent(self._component.instance, WindowEvent.WINDOW_CLOSING))
+        self._control.object.dispatchEvent(WindowEvent(self._control.object, WindowEvent.WINDOW_CLOSING))

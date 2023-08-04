@@ -1,3 +1,8 @@
+# v0.4.1
+> 2023-08-04
+
+-   Fix `Frame.close()` not working
+
 # v0.4.0
 > 2023-08-04
 
