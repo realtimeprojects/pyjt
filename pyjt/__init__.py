@@ -5,17 +5,25 @@ import jpype
 import jpype.imports
 
 def start(classpath=None):
-    """ Start the pyjt JVM.
+    """ Start the JVM.
 
-        Needs to be called before using pyjt.
+        Args:
+            classpath (string):
+                If set, use this classpath for the JVM, otherwise
+                use CLASSPATH environment variable.
 
-        :param classpath:   If set, use this classpath for the JVM, otherwise
-                            use CLASSPATH environment variable.
+        Needs to be called before using pyjt. Only after starting
+        the jvm you can import java classes using:
+
+        .. code:: python
+            import javax
+            from java.awt import Component
     """
     cp = os.environ.get('CLASSPATH', '') if classpath is None else classpath
     jpype.startJVM(jpype.getDefaultJVMPath(), f"-Djava.class.path={cp}")
 
 def stop():
+    """ Stop the JVM. """
     jpype.shutdownJVM()
 
 
@@ -25,6 +33,10 @@ def run(app, args=[""]):
 
         This helper function will start the **app** by invoking it's
         "main" function.
+
+        Args:
+            app (string):      The application to be started, e.g. ``myapp.Application``
+            args (string[]):   The arguments for the main function
 
         Note:
 
