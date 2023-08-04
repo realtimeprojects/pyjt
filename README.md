@@ -14,6 +14,12 @@ control the application from a test automation perspective.
 
 ## Quickstart
 
+-   Install pyjt
+
+    pip3 install pyjt
+
+-   Start testing your app
+
     import pyjt
 
     pyjt.start()
