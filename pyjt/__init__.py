@@ -44,6 +44,8 @@ def run(app, args=[""]):
             your application is in MyApplication.java, the could would look
             like:
 
+            .. code:: python
+
                 import MyApplication
                 MyApplication.main()
     """
