@@ -24,8 +24,8 @@ class LabeledTextField:
         container.add(self._container)
 
 
-def createAndShowGUI():
-    frame = JFrame("HelloWorldSwing")
+def createAndShowGUI(title):
+    frame = JFrame(title)
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
     frame.setBounds(10, 10, 500, 500)
     win = frame.getContentPane()
@@ -49,13 +49,16 @@ def createAndShowGUI():
 # Start an event loop thread to handling gui events
 @jpype.JImplements(java.lang.Runnable)
 class Launch:
+    def __init__(self, title):
+        self._title = title
+
     @jpype.JOverride
     def run(self):
-        createAndShowGUI()
+        createAndShowGUI(self._title)
 
 
-def main():
-    javax.swing.SwingUtilities.invokeLater(Launch())
+def main(title):
+    javax.swing.SwingUtilities.invokeLater(Launch(title))
 
 
 if __name__ == "__main__":

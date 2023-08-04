@@ -26,8 +26,20 @@ def javax(jvm):
 @pytest.fixture(scope='session')
 def helloworld(jvm):
     import helloworld
-    helloworld.main()
+    helloworld.main("HelloWorldSwing")
     window = pyjt.FrameFinder.find(title="HelloWorldSwing")
+    window.setDefaultCloseOperation(window.DISPOSE_ON_CLOSE)
+    yield window
+    if window:
+        window.dispose()
+
+
+@pytest.fixture()
+def hwlocal(jvm):
+    import helloworld
+    helloworld.main("hwlocal")
+    window = pyjt.FrameFinder.find(title="hwlocal")
+    window.setDefaultCloseOperation(window.DISPOSE_ON_CLOSE)
     yield window
     if window:
         window.dispose()
