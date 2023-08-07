@@ -83,7 +83,7 @@ class Fixture:
 
                     # search for a JTextField inside a Container which also contains
                     # a label with the text "Name"
-                    frame.find_by_xpath("//Container[//JLabel[@text="Name"]]/JTextField
+                    textfield = frame.find_by_xpath('//Container[//JLabel[@text="Name"]]/JTextField')
         """
         return ComponentFinder.find_by_xpath(self, xpath)
 
