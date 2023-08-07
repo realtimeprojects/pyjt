@@ -18,6 +18,11 @@ class Robot:
     """
     _robot = None
 
+    @property
+    def Events(self):
+        from java.awt.event import KeyEvent
+        return KeyEvent
+
     def __init__(self, robot=None, typespeed=20):
         import java
         from java.awt.event import KeyEvent
@@ -148,7 +153,7 @@ class Robot:
     def selectAll(self):
         """ Emulate selecting all text in the current context by pressing CTRL-A. """
         from java.awt.event import KeyEvent
-        self._typeVKs([KeyEvent.VK_CONTROL, KeyEvent.VK_A])
+        self.typeVirtualKeys([KeyEvent.VK_CONTROL, KeyEvent.VK_A])
 
     def type(self, text):
         """ Emulate user typing the given text.
@@ -167,9 +172,11 @@ class Robot:
         for char in text:
             if char not in self._KeyCodes:
                 raise Exception("Unknown character to type: '{char}'")
-            self._typeVKs(self._KeyCodes[char])
+            self.typeVirtualKeys(self._KeyCodes[char])
 
-    def _typeVKs(self, vks):
+    def typeVirtualKeys(self, vks):
+        if type(vks) is not list:
+            vks = [vks]
         vks = vks.copy()
         for vk in vks:
             time.sleep(1 / self._typespeed)
