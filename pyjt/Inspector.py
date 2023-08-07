@@ -5,6 +5,8 @@ from lxml import etree
 
 log = logging.getLogger(__name__)
 
+_fields = ['name', 'class', 'text', 'title']
+
 
 class Inspector:
     """ Helper class for inspecting the component tree of a specific component.
@@ -23,12 +25,8 @@ class Inspector:
                     for this component.
         """
         result = {}
-        result['name'] = str(component.getName())
-        result['class'] = str(component.getClass())
-        result['text'] = _getText(component)
-        title = _getTitle(component)
-        if title:
-            result['title'] = title
+        for field in _fields:
+            _set_field(result, component, field)
 
         result['childs'] = []
         if not hasattr(component, 'getComponents'):
@@ -48,13 +46,10 @@ class Inspector:
         _id = id(component)
         mapping[_id] = component
         element = etree.Element(str(component.getClass().getSimpleName()))
-        text = _getText(component)
-        if text is not None:
-            element.set("text", text)
-        element.set("name", str(component.getName()))
-        title = _getTitle(component)
-        if title is not None:
-            element.set("title", str(title))
+        for field in _fields:
+            value = _get_attribute(component, field)
+            if value is not None:
+                element.set(field, value)
         element.set("_id", str(_id))
 
         for subelement in component.components():
@@ -62,13 +57,18 @@ class Inspector:
         return (element, mapping)
 
 
-def _getTitle(component):
-    if not hasattr(component, 'getTitle'):
-        return None
-    return str(component.getTitle())
+@staticmethod
+def _set_field(result, component, field):
+    value = _get_attribute(component, field)
+    if value is not None:
+        result[field] = value
 
 
-def _getText(component):
-    if not hasattr(component, 'getText'):
+def _get_attribute(component, attribute):
+    func = f'get{attribute.title()}'
+    if not hasattr(component, func):
         return None
-    return str(component.getText())
+    value = getattr(component, func)()
+    if value is not None:
+        return str(value)
+    return ""
