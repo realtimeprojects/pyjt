@@ -1,5 +1,7 @@
 import logging
 from enum import Enum
+from lxml import etree
+
 from pyjt.Robot import Robot
 from pyjt.ComponentFinder import ComponentFinder, Locator
 from pyjt.Errors import ElementNotFoundError
@@ -128,12 +130,28 @@ class Fixture:
             self.click()
             if clear:
                 self.robot.selectAll()
+                self.robot.typeVirtualKeys(self.robot.Events.VK_DELETE)
             self.robot.type(text)
         if mode == FillMode.SET:
             self._control.setText(text)
 
     def components(self):
+        """ Returns:
+                Fixture[]:
+                    An array of Fixture references of all child
+                    components of this component.
+        """
         return [Fixture(el) for el in self.getComponents()]
+
+    def dump(self, encoding="utf-8"):
+        """ Returns:
+                string: A xml-representation of the component tree of this component.
+
+            Args:
+                encoding (string):
+                    The encoding to use to convert the component to xml
+        """
+        return etree.tostring(self.etree(), pretty_print=True, encoding=encoding)
 
     @property
     def control(self):
