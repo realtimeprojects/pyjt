@@ -77,6 +77,10 @@ class Fixture:
                     A fixture reference to the first component
                     matching the given xpath expression.
 
+            Raises:
+                ElementNotFoundError:
+                    If no element was found matching the given xpath
+
             Example:
 
             .. code:: python
@@ -85,7 +89,10 @@ class Fixture:
                     # a label with the text "Name"
                     textfield = frame.find_by_xpath('//Container[//JLabel[@text="Name"]]/JTextField')
         """
-        return ComponentFinder.find_by_xpath(self, xpath)
+        fixture = ComponentFinder.find_by_xpath(self, xpath)
+        if not fixture:
+            raise ElementNotFoundError(f"No element found matching xpath: '{xpath}'")
+        return fixture
 
     def click(self):
         """ Move the mouse over this control and execute a click. """

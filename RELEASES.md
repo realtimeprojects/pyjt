@@ -1,3 +1,9 @@
+# v0.5.1
+> 2023-08-07
+
+-   raise ElementNotFoundError on missed
+    xpath searches
+
 # v0.5.0
 > 2023-08-07
 

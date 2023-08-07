@@ -1,15 +1,13 @@
 from pyjt import Locator, ElementNotFoundError
 
+from tools import assert_raises
+
 import logging
 
 
 def test_locator_has_fail(helloworld, java, javax):
     loc = Locator(role=java.awt.Container).contains(role=javax.swing.JLabel, text="Namex:")
-    try:
-        helloworld.locate(loc)
-    except ElementNotFoundError:
-        return
-    assert False
+    assert_raises(ElementNotFoundError, lambda: helloworld.locate(loc))
 
 
 def test_locator_has(helloworld, java, javax):
