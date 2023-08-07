@@ -1,7 +1,9 @@
 import time
 import logging
+from lxml import etree
 
 from pyjt.Proxy import Proxy
+from pyjt.Inspector import Inspector
 
 log = logging.getLogger(__name__)
 
@@ -139,6 +141,22 @@ class ComponentFinder:
             if hit is not None:
                 return hit
         return None
+
+    @staticmethod
+    def find_by_xpath(control, xpath, timeout=None):
+        timeout = timeout if timeout else ComponentFinder.DEFAULT_TIMEOUT
+        timer = Timer(timeout, ComponentFinder.DEFAULT_DELAY).start()
+        xp = etree.XPath(xpath)
+
+        while not timer.elapsed():
+            log.debug(f"retry({xpath})")
+            (tree, mapping) = Inspector.etreemap(control)
+            el = xp(tree)
+            if not el:
+                continue
+            _id = el[0].get("_id")
+            log.warning(_id)
+            return mapping[int(_id)]
 
     @staticmethod
     def findIn(func, locator=None, timeout=None):

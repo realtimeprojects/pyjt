@@ -38,7 +38,7 @@ control the application from a test automation perspective.
         frame.locate(JButton, text="Ok").click()
 
         # Locate and fill text to an text field
-        frame.locate(JTextField, name="textfield1").fill("John Smith")
+        frame.find_by_xpath('//JTextField[@name="textfield1"]').fill("John Smith")
 
         # Close the frame (application)
         frame.close()

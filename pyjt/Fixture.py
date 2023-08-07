@@ -3,6 +3,7 @@ from enum import Enum
 from pyjt.Robot import Robot
 from pyjt.ComponentFinder import ComponentFinder, Locator
 from pyjt.Errors import ElementNotFoundError
+from pyjt.Inspector import Inspector
 
 log = logging.getLogger(__name__)
 
@@ -62,6 +63,30 @@ class Fixture:
         kwargs['role'] = role
         return self.locate(**kwargs)
 
+    def find_by_xpath(self, xpath):
+        """ Locate a component by xpath.
+
+            This function searches the component tree using an xpath-expression
+            to locate an element.
+
+            Args:
+                xpath (string): The xpath used for searching
+
+            Returns:
+                Fixture:
+                    A fixture reference to the first component
+                    matching the given xpath expression.
+
+            Example:
+
+            .. code:: python
+
+                    # search for a JTextField inside a Container which also contains
+                    # a label with the text "Name"
+                    frame.find_by_xpath("//Container[//JLabel[@text="Name"]]/JTextField
+        """
+        return ComponentFinder.find_by_xpath(self, xpath)
+
     def click(self):
         """ Move the mouse over this control and execute a click. """
         log.debug(f"click({self._control})")
@@ -100,12 +125,25 @@ class Fixture:
         if mode == FillMode.SET:
             self._control.setText(text)
 
+    def components(self):
+        return [Fixture(el) for el in self.getComponents()]
+
     @property
     def control(self):
         """ Returns:
                 Proxy:  A reference to the control managed by this fixture.
         """
         return self._control
+
+    @property
+    def type(self):
+        """ Returns:
+                ClassType: The type of class of this component
+        """
+        return type(self._control.object)
+
+    def etree(self):
+        return Inspector.etree(self)
 
     def __getattr__(self, name):
         return getattr(self._control, name)

@@ -1,3 +1,9 @@
+# v0.5.0
+> 2023-08-07
+
+-   support component lookup by xpath
+-   Fix title/text mixup in Inspector
+
 # v0.4.6
 > 2023-08-04
 

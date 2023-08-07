@@ -69,6 +69,13 @@ thread safety:
    firstname = frame.find(javax.swing.JTextField, name='first name')
    assert firstname.getText() == 'John'
 
+It is also possible to use xpath expressions to locate elements:
+
+.. code:: python
+
+    frame.find_by_xpath('//JTextField[@name="textfield1"]').fill("John Smith")
+
+
 Control UI elements
 -------------------
 
