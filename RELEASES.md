@@ -1,3 +1,10 @@
+# v0.5.2
+> 2023-08-07
+
+-   fix etree generation for empty titles and texts.
+    Empty titles and texts now produce empty attributes,
+    if the component has a getText() or getTitle() function.
+
 # v0.5.1
 > 2023-08-07
 

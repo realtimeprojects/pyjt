@@ -49,23 +49,22 @@ class Inspector:
         mapping[_id] = component
         element = etree.Element(str(component.getClass().getSimpleName()))
         text = _getText(component)
-        if text:
+        if text is not None:
             element.set("text", text)
         element.set("name", str(component.getName()))
         title = _getTitle(component)
-        if title:
+        if title is not None:
             element.set("title", str(title))
         element.set("_id", str(_id))
 
         for subelement in component.components():
-            log.debug(f"etree: found {subelement}")
             element.append(Inspector.etreemap(subelement, mapping)[0])
         return (element, mapping)
 
 
 def _getTitle(component):
     if not hasattr(component, 'getTitle'):
-        return "N/A"
+        return None
     return str(component.getTitle())
 
 
