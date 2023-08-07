@@ -1,3 +1,11 @@
+# v0.6.0
+> 2023-08-07
+
+-   Fix: Fixture.fill("") did not delete the text
+-   Inspetor/xml: Fix empty values handling for existing attributes
+-   Add `Fixture.dump()` for dumping tree to xml
+-   Robot: `add Robot().typeVirtualKeys()` for typing virtual keys
+
 # v0.5.2
 > 2023-08-07
 
