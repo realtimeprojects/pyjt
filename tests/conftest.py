@@ -6,7 +6,7 @@ import pyjt
 
 @pytest.fixture(scope='session')
 def jvm():
-    pyjt.start(classpath="./")
+    pyjt.start("-Xmx512m", "-Xmx4G", classpath="./")
     yield
     pyjt.stop()
 

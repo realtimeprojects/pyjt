@@ -4,7 +4,7 @@ import importlib
 import jpype
 import jpype.imports
 
-def start(classpath=None):
+def start(*args, classpath=None):
     """ Start the JVM.
 
         Args:
@@ -20,7 +20,7 @@ def start(classpath=None):
             from java.awt import Component
     """
     cp = os.environ.get('CLASSPATH', '') if classpath is None else classpath
-    jpype.startJVM(jpype.getDefaultJVMPath(), f"-Djava.class.path={cp}")
+    jpype.startJVM(jpype.getDefaultJVMPath(), f"-Djava.class.path={cp}", *args)
 
 def stop():
     """ Stop the JVM. """

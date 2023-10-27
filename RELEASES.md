@@ -1,3 +1,8 @@
+# v0.7.0
+> v0.7.0a1
+
+-   allow passing addition arguments to the JVM start
+
 # v0.6.0
 > 2023-08-07
 
