@@ -31,7 +31,7 @@ class Inspector:
         result['childs'] = []
         if not hasattr(component, 'getComponents'):
             return result
-        for child in component.components():
+        for child in component.getComponents():
             result['childs'].append(Inspector.inspect(child))
         return result
 
