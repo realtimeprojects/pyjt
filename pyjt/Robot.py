@@ -108,7 +108,7 @@ class Robot:
                 '%': [KeyEvent.VK_SHIFT, KeyEvent.VK_5],
                 '^': [KeyEvent.VK_SHIFT, KeyEvent.VK_CIRCUMFLEX],
                 '&': [KeyEvent.VK_SHIFT, KeyEvent.VK_AMPERSAND],
-                '*': [KeyEvent.VK_SHIFT, KeyEvent.VK_ASTERISK],
+                '*': [KeyEvent.VK_ASTERISK],
                 '(': [KeyEvent.VK_LEFT_PARENTHESIS],
                 ')': [KeyEvent.VK_RIGHT_PARENTHESIS],
                 '_': [KeyEvent.VK_SHIFT, KeyEvent.VK_UNDERSCORE],
