@@ -12,6 +12,20 @@ log = logging.getLogger(__name__)
 
 
 class FrameFinder:
+
+    @staticmethod
+    def root():
+        """ Determine the root window.
+
+            Returns:
+                Frame:
+                    The root window
+        """
+        from java.awt import Window
+        wp = Proxy(Window)
+        wins = wp.getWindows()
+        return Frame(wins[0])
+
     """ Find a frame in the list of application frames.
 
         Example:
@@ -47,12 +61,17 @@ class FrameFinder:
         raise ElementNotFoundError(f"Window {locator} not found!")
 
     @staticmethod
-    def inspect():
-        """ Inspect a component.
+    def waitFor(locator=None, **kwargs):
+        """ Wait **timeout** seconds for the given frame to appear """
+        pass
+
+    @staticmethod
+    def inspect() -> dict:
+        """ Inspect all available windows.
 
             Returns:
                 dict:
-                    A dicitionary tree of all ui components of all available
+                    A dictionary tree of all ui components of all available
                     frames.
         """
         from java.awt import Window

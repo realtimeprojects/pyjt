@@ -1,7 +1,8 @@
 # v0.7.0
-> v0.7.0a1
+> v0.7.0a5
 
 -   allow passing addition arguments to the JVM start
+-   Add `FrameFinder.root()` for getting the root window
 
 # v0.6.0
 > 2023-08-07
